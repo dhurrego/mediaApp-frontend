@@ -1,0 +1,42 @@
+<mat-dialog-content>
+    <form class="example-container" [formGroup]="form" #frmPaciente="ngForm" (ngSubmit)="operar()">
+    
+        <div [hidden]="true">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="ID" formControlName="idMedico">
+            </mat-form-field>
+        </div>
+    
+        <mat-form-field class="example-full-width">            
+            <input matInput placeholder="Nombres" minlength="3" required formControlName="nombres">             
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">        
+            <input matInput placeholder="Apellidos" required formControlName="apellidos">           
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="CMP" required formControlName="cmp" type="number">
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Foto URL" required formControlName="fotoUrl" type="text">
+        </mat-form-field>
+    
+        <div class="divImage">
+            <img mat-card-image [src]="fotoUrl" alt="" *ngIf="fotoUrl != null && fotoUrl != ''">
+        </div>
+    
+        <div class="divButton">
+            <button class="acciones" mat-raised-button color="primary" type="submit" [disabled]="frmPaciente.invalid">
+                <mat-icon>done</mat-icon>
+                <span>Aceptar</span>
+            </button>
+            <button class="acciones" mat-raised-button color="warn" type="button" (click)="cerrar()">
+                <mat-icon>close</mat-icon>
+                <span>Cancelar</span>
+            </button>
+        </div>
+    
+    </form>
+</mat-dialog-content>

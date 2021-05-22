@@ -1,0 +1,18 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.divButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.invalido {
+    color: red;
+}
+
+.acciones {
+    margin: 5px;
+}

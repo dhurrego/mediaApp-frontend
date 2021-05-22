@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+mat-sidenav-content, .mat-drawer-inner-container {
+    scrollbar-width: thin;
+    scrollbar-color: gray;
+}
+
+mat-sidenav-content::-webkit-scrollbar, .mat-drawer-inner-container::-webkit-scrollbar {
+    width: 7px;
+}
+
+mat-sidenav-content::-webkit-scrollbar-thumb, .mat-drawer-inner-container::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 5px;
+}
+
+.active {
+    background: #673ab7;
+    color: #fff ;
+}
+
+.active mat-icon {
+    color: white !important;
+}
+
+.active:hover {
+    background: #7b3de8 !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

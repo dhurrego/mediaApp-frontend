@@ -1,0 +1,28 @@
+<form class="example-container" [formGroup]="form" #frmExamen="ngForm" (ngSubmit)="operar()">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" formControlName="idExamen">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class="example-full-width">            
+        <input matInput placeholder="Nombre" minlength="3" required formControlName="nombre">             
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">        
+        <input matInput placeholder="Descripción" required formControlName="descripcion">           
+    </mat-form-field>
+
+    <div class="divButton">
+        <button class="acciones" mat-raised-button color="primary" type="submit" [disabled]="frmExamen.invalid">
+            <mat-icon>done</mat-icon>
+            <span>Aceptar</span>
+        </button>
+        <button class="acciones" mat-raised-button color="warn" type="button" (click)="cerrar()">
+            <mat-icon>close</mat-icon>
+            <span>Cancelar</span>
+        </button>
+    </div>
+
+</form>

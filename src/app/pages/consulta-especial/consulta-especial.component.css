@@ -1,0 +1,17 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.example-container>* {
+    width: 100%;
+}
+
+.botonRemover {
+    margin: 10px;
+}
+
+.botones {
+    margin-bottom: 10px;
+}
