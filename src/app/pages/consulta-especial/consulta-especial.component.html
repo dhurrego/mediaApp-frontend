@@ -30,5 +30,63 @@
           </mat-option>
         </mat-autocomplete>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Click</button>
+    <mat-form-field>
+      <mat-label>Especialidad</mat-label>
+      <mat-select [(value)]="especialidadSeleccionada" (selectionChange)="seleccionarEsp($event)" formControlName="especialidad">
+          <mat-option *ngFor="let especialidad of especialidades"
+              [value]="especialidad">
+              {{especialidad.nombre}}
+          </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Fecha (dd/mm/yyyy)" [(ngModel)]="fechaSeleccionada"
+          name="fechaSeleccionada" [max]="maxFecha" formControlName="fecha">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Diagnostico" [(ngModel)]="diagnostico" formControlName="diagnostico">
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput placeholder="Tratamiento" [(ngModel)]="tratamiento" formControlName="tratamiento"></textarea>
+    </mat-form-field>
+    
+    <button type="button" class="botones" mat-raised-button color="primary" (click)="agregar()">Agregar Detalle</button>
+    
+    <mat-expansion-panel *ngFor="let d of detalleConsulta; let i = index">
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+              {{ i + 1}} {{ d.diagnostico }}
+          </mat-panel-title>
+          <mat-panel-description>
+              Ver tratamiento
+          </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+          <textarea matInput placeholder="Tratamiento">{{d.tratamiento}}</textarea>
+      </mat-form-field>
+      <button type="button" class="botonRemover" mat-raised-button color="warn" (click)="removerDiagnostico(i)">Remover</button>
+  </mat-expansion-panel>
+
+  <mat-form-field>
+      <mat-label>Examen</mat-label>
+      <mat-select [(value)]="examenSeleccionado">
+          <mat-option *ngFor="let examen of examenes"
+              [value]="examen">
+              {{examen.nombre}}
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+
+  <mat-list role="list">
+      <mat-list-item role="listItem" *ngFor="let ex of examenesSeleccionados; let i = index">
+          {{ ex.idExamen }} {{ ex.nombre }}
+          <button type="button" class="botonRemover" mat-raised-button color="warn" (click)="removerExamen(i)">Remover</button>
+      </mat-list-item>
+  </mat-list>
+
+  <button type="button" class="botones" mat-raised-button color="primary" (click)="agregarExamen()">Agregar Examen</button>
+  
+  <button type="submit" class="botones" mat-raised-button color="primary" [disabled]="estadoBotonRegistrar()">Registrar Consulta</button>
 </form>
