@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,7 +16,7 @@ import { of } from 'rxjs';
   templateUrl: './paciente.component.html',
   styleUrls: ['./paciente.component.css']
 })
-export class PacienteComponent implements OnInit {
+export class PacienteComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['idPaciente', 'nombres', 'apellidos', 'acciones']
   dataSource: MatTableDataSource<Paciente> = new MatTableDataSource<Paciente>();
@@ -27,6 +27,13 @@ export class PacienteComponent implements OnInit {
 
   constructor(private _pacienteService: PacienteService,
               public dialog: MatDialog) { }
+  
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, 1000);
+  }
 
   ngOnInit(): void {
     this._pacienteService.listar().subscribe(

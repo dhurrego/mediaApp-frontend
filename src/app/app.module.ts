@@ -8,6 +8,7 @@ import { MaterialModule } from './material/material.module';
 
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ConfirmarEliminacionDialogoComponent } from './shared/confirmar-eliminacion-dialogo/confirmar-eliminacion-dialogo.component';
 import { MedicoComponent } from './pages/medico/medico.component';
@@ -20,6 +21,7 @@ import { EspecialidadComponent } from './pages/especialidad/especialidad.compone
 import { EspecialidadEdicionComponent } from './pages/especialidad/especialidad-edicion/especialidad-edicion.component';
 import { ConsultaComponent } from './pages/consulta/consulta.component';
 import { ConsultaEspecialComponent } from './pages/consulta-especial/consulta-especial.component';
+import { WizardComponent } from './pages/wizard/wizard.component';
 
 @NgModule({
   declarations: [
@@ -34,13 +36,15 @@ import { ConsultaEspecialComponent } from './pages/consulta-especial/consulta-es
     EspecialidadComponent,
     EspecialidadEdicionComponent,
     ConsultaComponent,
-    ConsultaEspecialComponent
+    ConsultaEspecialComponent,
+    WizardComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
     AppRoutingModule,
     MaterialModule,

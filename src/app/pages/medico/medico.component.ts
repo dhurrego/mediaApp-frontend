@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -16,16 +16,23 @@ import { of } from 'rxjs';
   templateUrl: './medico.component.html',
   styleUrls: ['./medico.component.css']
 })
-export class MedicoComponent implements OnInit {
+export class MedicoComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['idMedico', 'nombres', 'apellidos', 'cmp', 'acciones']
-  dataSource: MatTableDataSource<Medico> = new MatTableDataSource<Medico>();
+  dataSource: MatTableDataSource<Medico> = new MatTableDataSource();
   @ViewChild(MatSort) sort!: MatSort; 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   cargando: boolean = true;
 
   constructor( private _medicoService: MedicoService,
                 public dialog: MatDialog ) { }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, 1000);
+  }
 
   ngOnInit(): void {
     this._medicoService.listar()

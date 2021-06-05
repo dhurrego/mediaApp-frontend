@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,7 +17,7 @@ import { of } from 'rxjs';
   templateUrl: './examen.component.html',
   styleUrls: ['./examen.component.css']
 })
-export class ExamenComponent implements OnInit {
+export class ExamenComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['idExamen', 'nombre', 'descripcion', 'acciones']
   dataSource: MatTableDataSource<Examen> = new MatTableDataSource<Examen>();
@@ -28,6 +28,13 @@ export class ExamenComponent implements OnInit {
 
   constructor(private _examenService: ExamenService,
     public dialog: MatDialog) { }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, 1000);
+  }
 
   ngOnInit(): void {
     this._examenService.listar().subscribe(

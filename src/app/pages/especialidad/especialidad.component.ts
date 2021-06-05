@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Especialidad } from '../../models/especialidad';
 import { MatSort } from '@angular/material/sort';
@@ -16,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './especialidad.component.html',
   styleUrls: ['./especialidad.component.css']
 })
-export class EspecialidadComponent implements OnInit {
+export class EspecialidadComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['idEspecialidad', 'nombre', 'descripcion', 'acciones']
   dataSource: MatTableDataSource<Especialidad> = new MatTableDataSource<Especialidad>();
@@ -28,6 +28,13 @@ export class EspecialidadComponent implements OnInit {
   constructor(private _especialidadService: EspecialidadService,
               public route: ActivatedRoute,
               public dialog: MatDialog) { }
+  
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, 1000);
+  }
 
   ngOnInit(): void {
     this._especialidadService.listar().subscribe(

@@ -85,7 +85,7 @@ export class ConsultaEspecialComponent implements OnInit {
       );
   }
 
-  listarPacientes() {
+  listarMedicos() {
     this.medicoService.listar().subscribe( medicos => {
       this.medicos = medicos;
     }); 
@@ -95,7 +95,7 @@ export class ConsultaEspecialComponent implements OnInit {
     return medico ? `${medico.nombres} ${medico.apellidos}` : medico;
   }
 
-  listarMedicos() {
+  listarPacientes() {
     this.pacienteService.listar().subscribe( pacientes => {
       this.pacientes = pacientes;
     }); 
