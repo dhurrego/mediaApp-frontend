@@ -53,7 +53,7 @@ export class WizardComponent implements OnInit {
   examenesSeleccionados: Examen[] = [];
 
   consultorios: number[] = [];
-  consultorioSeleccionado: number = 0;
+  consultorioSeleccionado!: number;
 
   constructor(
     private fb: FormBuilder,
@@ -170,18 +170,18 @@ export class WizardComponent implements OnInit {
   }
 
   estadoBotonRegistrar(){
-    return (this.detalleConsulta.length === 0 || this.especialidadSeleccionado === null || this.medicoSeleccionado === null || this.pacienteSeleccionado === null )
+    return (this.detalleConsulta.length === 0 || this.especialidadSeleccionado === null || this.medicoSeleccionado === null || this.pacienteSeleccionado === null || !this.consultorioSeleccionado)
   }
 
   aceptar() {
     if(!this.estadoBotonRegistrar()){
 
       let consulta = new Consulta();
-      consulta.medico = this.primerFormGroup.value['medico'];
+      consulta.medico = this.medicoSeleccionado;
       consulta.paciente = this.primerFormGroup.value['cboPaciente'];
       consulta.especialidad = this.especialidadSeleccionado;
       consulta.detalleConsulta = this.detalleConsulta;
-      consulta.numConsultorio = "C1";
+      consulta.numConsultorio = this.consultorioSeleccionado.toString();
       consulta.fecha = moment(this.fechaSeleccionada).format('YYYY-MM-DDTHH:mm:ss');
       // let tzoffset = (new Date()).getTimezoneOffset() * 60000;
       // let localISOTime = (new Date(this.fechaSeleccionada.getTime() - tzoffset)).toISOString();
