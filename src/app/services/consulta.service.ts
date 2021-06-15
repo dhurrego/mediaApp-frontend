@@ -6,6 +6,7 @@ import { ConsultaListaExamenDTO } from '../dto/consultaListaExamenDTO';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Consulta } from '../models/consulta';
 import { FiltroConsultaDTO } from '../dto/filtroConsultaDTO';
+import { ConsultaResumenDTO } from '../dto/consultaResumenDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,10 @@ export class ConsultaService {
 
   listarExamenPorConsulta(idconsulta: number) {
     return this.http.get<ConsultaListaExamenDTO[]>(`${environment.HOST}/consultaexamenes/${idconsulta}`);
+  }
+
+  listarResumen() {
+    return this.http.get<ConsultaResumenDTO[]>(`${this.url}/listarResumen`);
   }
 
   openSnackBar(mensaje: string) {

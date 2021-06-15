@@ -24,6 +24,7 @@ import { ConsultaEspecialComponent } from './pages/consulta-especial/consulta-es
 import { WizardComponent } from './pages/wizard/wizard.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { BuscarDialogoComponent } from './pages/buscar/buscar-dialogo/buscar-dialogo.component';
+import { ReporteComponent } from './pages/reporte/reporte.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { BuscarDialogoComponent } from './pages/buscar/buscar-dialogo/buscar-dia
     ConsultaEspecialComponent,
     WizardComponent,
     BuscarComponent,
-    BuscarDialogoComponent
+    BuscarDialogoComponent,
+    ReporteComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { ConsultaComponent } from './pages/consulta/consulta.component';
 import { ConsultaEspecialComponent } from './pages/consulta-especial/consulta-especial.component';
 import { WizardComponent } from './pages/wizard/wizard.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
+import { ReporteComponent } from './pages/reporte/reporte.component';
 
 const routes: Routes = [
   { path: 'buscar', component: BuscarComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'examenes', component: ExamenComponent },
   { path: 'medicos', component: MedicoComponent },
   { path: 'pacientes', component: PacienteComponent },
+  { path: 'reportes', component: ReporteComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
