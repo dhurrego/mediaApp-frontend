@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { ConsultaListaExamenDTO } from '../dto/consultaListaExamenDTO';
-import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Consulta } from '../models/consulta';
+import { FiltroConsultaDTO } from '../dto/filtroConsultaDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,18 @@ export class ConsultaService {
 
   registrarTransaccion(consultaDTO: ConsultaListaExamenDTO) {
     return this.http.post(this.url, consultaDTO);
+  }
+
+  buscarOtros(filtroConsulta: FiltroConsultaDTO) {
+    return this.http.post<Consulta[]>(`${this.url}/buscar/otros`, filtroConsulta);
+  }
+
+  buscarFecha(fecha: string) {
+    return this.http.get<Consulta[]>(`${this.url}/buscar?fecha=${fecha}`);
+  }
+
+  listarExamenPorConsulta(idconsulta: number) {
+    return this.http.get<ConsultaListaExamenDTO[]>(`${environment.HOST}/consultaexamenes/${idconsulta}`);
   }
 
   openSnackBar(mensaje: string) {

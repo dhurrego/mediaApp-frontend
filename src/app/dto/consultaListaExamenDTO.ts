@@ -3,5 +3,5 @@ import { Examen } from '../models/examen';
 
 export class ConsultaListaExamenDTO {
     consulta: Consulta = new Consulta();
-    listaExamenes: Examen[] = [];
+    listaExamenes!: Examen[];
 }

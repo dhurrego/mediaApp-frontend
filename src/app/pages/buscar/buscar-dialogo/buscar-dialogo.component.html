@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Paciente: {{consulta.paciente.nombres | titlecase}} {{consulta.paciente.apellidos | titlecase}} | Fecha de Consulta: {{consulta.fecha | date:'dd-MM-yyyy'}}</h2>
+<mat-dialog-content>
+    <h3>Diagnosticos: </h3>
+    <mat-card class="example-card" *ngFor="let det of consulta.detalleConsulta">
+        <mat-card-header>
+            <mat-card-title>{{det.diagnostico}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{det.tratamiento}}</p>
+        </mat-card-content>
+    </mat-card>
+    <br>
+    <h3>Examenes: </h3>
+    <mat-card class="example-card" *ngFor="let ce of listaExamenes">
+        <mat-card-header>
+            <mat-card-title>{{ce.examen.nombre}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{ce.examen.descripcion}}</p>
+        </mat-card-content>
+    </mat-card>
+</mat-dialog-content>

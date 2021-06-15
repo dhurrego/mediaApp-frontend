@@ -8,8 +8,10 @@ import { EspecialidadEdicionComponent } from './pages/especialidad/especialidad-
 import { ConsultaComponent } from './pages/consulta/consulta.component';
 import { ConsultaEspecialComponent } from './pages/consulta-especial/consulta-especial.component';
 import { WizardComponent } from './pages/wizard/wizard.component';
+import { BuscarComponent } from './pages/buscar/buscar.component';
 
 const routes: Routes = [
+  { path: 'buscar', component: BuscarComponent },
   { path: 'consulta', component: ConsultaComponent },
   { path: 'consulta-especial', component: ConsultaEspecialComponent },
   { path: 'consulta-wizard', component: WizardComponent },
