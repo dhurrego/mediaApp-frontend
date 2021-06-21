@@ -8,7 +8,9 @@ import { MaterialModule } from './material/material.module';
 
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { ConfirmarEliminacionDialogoComponent } from './shared/confirmar-eliminacion-dialogo/confirmar-eliminacion-dialogo.component';
 import { MedicoComponent } from './pages/medico/medico.component';
@@ -54,6 +56,7 @@ import { ReporteComponent } from './pages/reporte/reporte.component';
     ReactiveFormsModule,
     AppRoutingModule,
     MaterialModule,
+    PdfViewerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

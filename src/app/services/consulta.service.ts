@@ -38,6 +38,20 @@ export class ConsultaService {
     return this.http.get<ConsultaResumenDTO[]>(`${this.url}/listarResumen`);
   }
 
+  generarReporte() {
+    return this.http.get(`${this.url}/generarReporte`, { responseType: 'blob'});
+  }
+
+  guardarArchivo(data: File) {    
+    const formData: FormData = new FormData();
+    formData.append('adjunto', data);
+    return this.http.post(`${this.url}/guardarArchivo`, formData);
+  }
+
+  leerArchivo() {
+    return this.http.get(`${this.url}/leerArchivo/1`, { responseType: 'blob'});
+  }
+
   openSnackBar(mensaje: string) {
     this.snackBar.open(mensaje, 'Aceptar',{
       duration: 5000

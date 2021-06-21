@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { NativeDateAdapter } from '@angular/material/core';
 
+import * as moment from 'moment';
+
 //https://stackoverflow.com/questions/58132292/angular-material-datepicker-input-format
 @Injectable()
 export class CustomDateAdapter extends NativeDateAdapter {
@@ -17,6 +19,7 @@ export class CustomDateAdapter extends NativeDateAdapter {
       return new Date(year, month, date);
     }
     const timestamp = typeof value === 'number' ? value : Date.parse(value);
+    console.log(timestamp)
     return isNaN(timestamp) ? null : new Date(timestamp);
   }
 
@@ -26,8 +29,7 @@ export class CustomDateAdapter extends NativeDateAdapter {
       date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
     displayFormat = Object.assign({}, displayFormat, { timeZone: 'utc' });
 
-    const dtf = new Intl.DateTimeFormat(this.locale, displayFormat);
-    return dtf.format(date).replace(/[\u200e\u200f]/g, '');
+    return moment(date).add(1, 'days').format('DD/MM/YYYY');
   }
 
 }
