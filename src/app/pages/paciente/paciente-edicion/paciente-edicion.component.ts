@@ -67,11 +67,7 @@ export class PacienteEdicionComponent implements OnInit {
           this.pacienteService.setMensajeCambio("Se modifico el paciente correctamente");
         });
         this.cerrar();
-      },
-      (error: HttpErrorResponse) => {
-        this.pacienteService.openSnackBar(error.error.mensaje);
-      }
-      );
+      });
     } else {
       this.pacienteService.registrar(paciente).subscribe( () => {
         this.pacienteService.listar().subscribe( pacientes => {

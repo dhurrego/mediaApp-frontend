@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material/material.module';
@@ -27,6 +27,7 @@ import { WizardComponent } from './pages/wizard/wizard.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { BuscarDialogoComponent } from './pages/buscar/buscar-dialogo/buscar-dialogo.component';
 import { ReporteComponent } from './pages/reporte/reporte.component';
+import { ServerErrorsInterceptor } from './shared/server-errors.interceptor';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,9 @@ import { ReporteComponent } from './pages/reporte/reporte.component';
     MaterialModule,
     PdfViewerModule,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ServerErrorsInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
