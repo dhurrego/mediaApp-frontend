@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -16,29 +16,25 @@ import { of } from 'rxjs';
   templateUrl: './paciente.component.html',
   styleUrls: ['./paciente.component.css']
 })
-export class PacienteComponent implements OnInit, AfterViewInit {
+export class PacienteComponent implements OnInit {
 
   displayedColumns: string[] = ['idPaciente', 'nombres', 'apellidos', 'acciones']
   dataSource: MatTableDataSource<Paciente> = new MatTableDataSource<Paciente>();
   cargando: boolean = true;
+  cantidad: number = 5;
   
   @ViewChild(MatSort) sort!: MatSort; 
   @ViewChild(MatPaginator) paginator!: MatPaginator; 
 
   constructor(private _pacienteService: PacienteService,
               public dialog: MatDialog) { }
-  
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }, 1000);
-  }
-
   ngOnInit(): void {
-    this._pacienteService.listar().subscribe(
-      pacientes => {
-        this.crearTabla(pacientes);
+    this._pacienteService.listarPageable(0, 5).subscribe(
+      data => {
+        this.cantidad = data.totalElements;
+        this.dataSource = new MatTableDataSource(data.content);
+        this.dataSource.sort = this.sort;
+        this.cargando = false;
       }
     );
     this._pacienteService.getPacienteCambio().subscribe(
@@ -88,6 +84,17 @@ export class PacienteComponent implements OnInit, AfterViewInit {
 
   filtrar( valor: string ){
     this.dataSource.filter = valor.trim().toLowerCase();
+  }
+
+  mostrarMas(event: PageEvent){
+    this._pacienteService.listarPageable(event.pageIndex, event.pageSize).subscribe(
+      data => {
+        this.cantidad = data.totalElements;
+        this.dataSource = new MatTableDataSource(data.content);
+        this.dataSource.sort = this.sort;
+        this.cargando = false;
+      }
+    );
   }
 
   openDialogo( paciente?: Paciente) {

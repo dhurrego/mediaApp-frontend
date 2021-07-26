@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { ConsultaListaExamenDTO } from '../dto/consultaListaExamenDTO';
@@ -42,10 +42,19 @@ export class ConsultaService {
     return this.http.get(`${this.url}/generarReporte`, { responseType: 'blob'});
   }
 
-  guardarArchivo(data: File) {    
+  // guardarArchivo(data: File) {    
+  //   const formData: FormData = new FormData();
+  //   formData.append('adjunto', data);
+  //   return this.http.post(`${this.url}/guardarArchivo`, formData);
+  // }
+
+  guardarArchivo(file: File) {
+
+    const params = new HttpParams()
+          .set('usuario', 'Deivid');
     const formData: FormData = new FormData();
-    formData.append('adjunto', data);
-    return this.http.post(`${this.url}/guardarArchivo`, formData);
+    formData.append('file', file, 'prueba.png');
+    return this.http.post(`${this.url}/upload`, formData, { params });
   }
 
   leerArchivo() {
